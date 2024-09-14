@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :sessions do
+    resource :passwordless, only: [:new, :edit, :create]
+  end
   resources :job_listings
   resources :companies
   get  "sign_in", to: "sessions#new"
