@@ -4,5 +4,5 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import LucideIconsController from "./lucide_icons_controller"
+application.register("lucide-icons", LucideIconsController)
