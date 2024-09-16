@@ -8,6 +8,8 @@ class User < ApplicationRecord
     password_salt.last(10)
   end
 
+  has_many :posts
+  has_many :likes
 
   has_many :sessions, dependent: :destroy
   has_many :sign_in_tokens, dependent: :destroy
