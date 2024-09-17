@@ -1,16 +1,41 @@
-# Create first User
-User.create!(
-  name: "Admin",
+user = User.create!(
+  name: "admin",
   email: "admin@admin.com",
-  password: "password",
+  password: "password"
 )
 
-Company.create!(
-  name: "Emprego Facil"
-)
+5.times do
+  Post.create!(
+    body: Faker::Lorem.paragraph,
+    user: user
+  )
+end
 
-JobListing.create!(
-  title: "Junior Full Stack Developer",
-  description: "Junior Full Stack Developer",
-  company: Company.first
-)
+10.times do
+  user = User.create!(
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    password: "password"
+  )
+
+  5.times do
+    Post.create!(
+      body: Faker::Lorem.paragraph,
+      user: user
+    )
+  end
+end
+
+5.times do
+  company = Company.create!(
+    name: Faker::Company.name,
+  )
+
+  5.times do
+    JobListing.create!(
+      title: Faker::Job.title,
+      description: Faker::Lorem.paragraphs.join,
+      company: company
+    )
+  end
+end
