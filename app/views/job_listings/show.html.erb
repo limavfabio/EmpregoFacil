@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<div class="flex h-screen">
+  <!-- Left Panel: List of Cards -->
+  <div class="w-1/3 bg-gray-100 p-4 overflow-y-auto">
+    <h2 class="text-lg font-semibold mb-4">Card List</h2>
+    <div class="space-y-4">
+      
+      <% JobListing.all.each do |job_listing| %>
+        <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+          <h3 class="font-semibold"><%= @job_listing.title %></h3>
+          <p class="text-gray-600"><%= @job_listing.description %></p>
 
-<%= render @job_listing %>
+        </div>
+      <% end %>
+      
 
-<div>
-  <%= link_to "Edit this job listing", edit_job_listing_path(@job_listing) %> |
-  <%= link_to "Back to job listings", job_listings_path %>
+      <!-- Add more cards as needed -->
+    </div>
+  </div>
 
-  <%= button_to "Destroy this job listing", @job_listing, method: :delete %>
+  <!-- Right Panel: Details of Selected Card -->
+  <%= render "job_listing", job_listing: @job_listing %>
 </div>
