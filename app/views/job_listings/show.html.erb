@@ -5,11 +5,12 @@
     <div class="space-y-4">
       
       <% JobListing.all.each do |job_listing| %>
-        <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
-          <h3 class="font-semibold"><%= @job_listing.title %></h3>
-          <p class="text-gray-600"><%= @job_listing.description %></p>
-
-        </div>
+          <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+            <h3 class="font-semibold"><%= job_listing.title %></h3>
+            <%= link_to "See More", job_listing_path(job_listing), class: "underline text-blue-500 hover:text-blue-400" %> 
+            <p class="text-gray-600"><%= job_listing.description %></p>
+          </div>
+        
       <% end %>
       
 

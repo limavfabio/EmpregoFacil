@@ -25,7 +25,9 @@ class JobListingsController < ApplicationController
 
     respond_to do |format|
       if @job_listing.save
-        format.html { redirect_to job_listing_url(@job_listing), notice: "Job listing was successfully created." }
+        format.html { redirect_to job_listing_url(@job_listing),
+        notice: "Job listing was successfully created." }
+
         format.json { render :show, status: :created, location: @job_listing }
       else
         format.html { render :new, status: :unprocessable_entity }
