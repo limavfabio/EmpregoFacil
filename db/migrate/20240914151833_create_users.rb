@@ -7,7 +7,6 @@ class CreateUsers < ActiveRecord::Migration[7.2]
       t.boolean :verified, null: false, default: false
 
       t.string :phone_number
-      t.string :profile_picture
       t.text :bio
       t.string :location
 

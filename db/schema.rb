@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_19_175617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
     t.datetime "updated_at", null: false
     t.index ["connected_user_id"], name: "index_connections_on_connected_user_id"
     t.index ["user_id"], name: "index_connections_on_user_id"
+  end
+
+  create_table "conversation_participants", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_conversation_participants_on_conversation_id"
+    t.index ["user_id"], name: "index_conversation_participants_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "educations", force: :cascade do |t|
@@ -113,6 +127,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id", null: false
@@ -124,7 +148,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
   create_table "recommendations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "recommender_id", null: false
-    t.text "content"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recommender_id"], name: "index_recommendations_on_recommender_id"
@@ -166,7 +190,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
     t.string "password_digest", null: false
     t.boolean "verified", default: false, null: false
     t.string "phone_number"
-    t.string "profile_picture"
     t.text "bio"
     t.string "location"
     t.datetime "created_at", null: false
@@ -178,6 +201,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "connections", "users"
   add_foreign_key "connections", "users", column: "connected_user_id"
+  add_foreign_key "conversation_participants", "conversations"
+  add_foreign_key "conversation_participants", "users"
   add_foreign_key "educations", "users"
   add_foreign_key "experiences", "companies"
   add_foreign_key "experiences", "users"
@@ -186,6 +211,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
   add_foreign_key "job_listings", "companies"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "recommendations", "users"
   add_foreign_key "recommendations", "users", column: "recommender_id"
