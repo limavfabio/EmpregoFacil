@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_19_165936) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_19_174325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_165936) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "connections", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "connected_user_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["connected_user_id"], name: "index_connections_on_connected_user_id"
+    t.index ["user_id"], name: "index_connections_on_user_id"
+  end
+
   create_table "educations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "school"
@@ -74,6 +84,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_165936) do
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
+  create_table "job_applications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "job_listing_id", null: false
+    t.integer "status", default: 0, null: false
+    t.text "cover_letter"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_listing_id"], name: "index_job_applications_on_job_listing_id"
+    t.index ["user_id"], name: "index_job_applications_on_user_id"
+  end
+
   create_table "job_listings", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -98,6 +119,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_165936) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "recommendations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recommender_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recommender_id"], name: "index_recommendations_on_recommender_id"
+    t.index ["user_id"], name: "index_recommendations_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -145,13 +176,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_165936) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "connections", "users"
+  add_foreign_key "connections", "users", column: "connected_user_id"
   add_foreign_key "educations", "users"
   add_foreign_key "experiences", "companies"
   add_foreign_key "experiences", "users"
+  add_foreign_key "job_applications", "job_listings"
+  add_foreign_key "job_applications", "users"
   add_foreign_key "job_listings", "companies"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "recommendations", "users"
+  add_foreign_key "recommendations", "users", column: "recommender_id"
   add_foreign_key "sessions", "users"
   add_foreign_key "sign_in_tokens", "users"
   add_foreign_key "user_skills", "skills"

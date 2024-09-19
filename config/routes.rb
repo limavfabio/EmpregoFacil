@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :messages
+  resources :conversations
+  resources :job_applications
   resources :skills
   resources :educations
   resources :experiences
