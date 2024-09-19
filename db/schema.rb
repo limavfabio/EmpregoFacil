@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_15_200022) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_19_164255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,32 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_200022) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "school"
+    t.string "degree"
+    t.string "field_of_study"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_educations_on_user_id"
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.bigint "company_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "current"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_experiences_on_company_id"
+    t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
   create_table "job_listings", force: :cascade do |t|
@@ -89,18 +115,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_200022) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
     t.boolean "verified", default: false, null: false
+    t.string "phone_number"
+    t.string "profile_picture"
+    t.text "bio"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name", null: false
-    t.string "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "educations", "users"
+  add_foreign_key "experiences", "companies"
+  add_foreign_key "experiences", "users"
   add_foreign_key "job_listings", "companies"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"

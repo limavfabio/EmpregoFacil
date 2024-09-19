@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :educations
+  resources :experiences
   resources :companies
   resources :job_listings
   resources :likes, only: [ :create, :destroy ]
