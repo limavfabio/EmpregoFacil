@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_19_164255) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_19_165936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -114,6 +114,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_164255) do
     t.index ["user_id"], name: "index_sign_in_tokens_on_user_id"
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -139,4 +154,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_19_164255) do
   add_foreign_key "posts", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "sign_in_tokens", "users"
+  add_foreign_key "user_skills", "skills"
+  add_foreign_key "user_skills", "users"
 end
