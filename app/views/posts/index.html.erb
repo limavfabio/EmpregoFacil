@@ -2,17 +2,43 @@
 
 <% content_for :title, "Posts" %>
 
-<div>
-  <%= form_with model: Post.new do |form| %>
-    <%= form.text_area :body %>
-    <%= form.submit "Submit" %>
-  <% end %>
-</div>
+<div class="container mx-auto px-4">
+  <div class="flex flex-wrap -mx-4">
+    <!-- Left Column: User's Mini Profile -->
+    <div class="w-full md:w-1/4 px-4 mb-4">
+      <div class="bg-white rounded-lg shadow p-4">
+        <img class="w-20 h-20 rounded-full mx-auto" src="https://placehold.co/80" alt="User Profile Picture">
+        <h2 class="text-xl font-semibold text-center mt-2"><%= current_user.name %></h2>
+        <p class="text-gray-600 text-center"><%= current_user.email %></p>
+        <!-- Add more user details as needed -->
+      </div>
+    </div>
 
-<div id="posts">
-  <% @posts.reverse.each do |post| %>
-    <%= render post %>
-  <% end %>
-</div>
+    <!-- Middle Column: Post Form and Posts -->
+    <div class="w-full md:w-1/2 px-4 mb-4">
+      <!-- Post Creation Form -->
+      <div class="bg-white rounded-lg shadow p-4 mb-4">
+        <%= form_with(model: Post.new, local: true, class: "space-y-4") do |form| %>
+          <%= form.text_area :body, placeholder: "What's on your mind?", class: "w-full p-2 border rounded" %>
+          <div class="flex justify-between items-center">
+            <%= form.file_field :images, multiple: true, class: "text-sm" %>
+            <%= form.submit "Post", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+          </div>
+        <% end %>
+      </div>
 
-<%= link_to "New post", new_post_path %>
+      <!-- Posts -->
+      <div id="posts" class="space-y-4">
+        <%= render @posts %>
+      </div>
+    </div>
+
+    <!-- Right Column: Placeholder Content -->
+    <div class="w-full md:w-1/4 px-4 mb-4">
+      <div class="bg-white rounded-lg shadow p-4">
+        <h3 class="font-semibold text-lg mb-2">Placeholder Content</h3>
+        <p class="text-gray-600">This space is reserved for future content.</p>
+      </div>
+    </div>
+  </div>
+</div>
