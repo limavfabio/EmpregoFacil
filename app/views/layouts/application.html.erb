@@ -22,11 +22,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body data-controller="lucide-icons">
+  <body class="bg-gray-100" data-controller="lucide-icons">
     <%= render "layouts/header" %>
 
     <p style="color: green"><%= notice %></p>
     <p style="color: red"><%= alert %></p>
-    <%= yield %>
+    <div class="container mx-auto px-4 py-8"><%= yield %></div>
   </body>
 </html>
