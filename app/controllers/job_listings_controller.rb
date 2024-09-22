@@ -1,9 +1,11 @@
 class JobListingsController < ApplicationController
   before_action :set_job_listing, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate, only: %i[ index show ]
 
   # GET /job_listings or /job_listings.json
   def index
     @job_listings = JobListing.all
+    redirect_to job_listing_path(JobListing.first)
   end
 
   # GET /job_listings/1 or /job_listings/1.json
