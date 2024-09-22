@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :likes
+  has_many :experiences
+  has_many :educations
+  has_many :user_skills
+  has_many :skills, through: :user_skills
 
   has_many :sessions, dependent: :destroy
   has_many :sign_in_tokens, dependent: :destroy

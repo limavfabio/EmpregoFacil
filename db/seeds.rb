@@ -15,6 +15,15 @@ admin = User.create!(
   )
 end
 
+rand(3..8).times do
+  UserSkill.create!(
+    user: admin,
+    skill: Skill.order("RANDOM()").first
+  )
+end
+
+
+
 20.times do
   Skill.create!(name: Faker::Job.key_skill)
 end
@@ -40,6 +49,29 @@ end
       cover_letter: Faker::Lorem.paragraphs(number: 3).join("\n\n")
     )
   end
+end
+
+rand(1..3).times do
+  Education.create!(
+    user: admin,
+    school: Faker::Educator.university,
+    degree: Faker::Educator.degree,
+    field_of_study: Faker::Educator.course,
+    start_date: Faker::Date.between(from: 5.years.ago, to: 2.years.ago),
+    end_date: Faker::Date.between(from: 2.years.ago, to: Date.today)
+  )
+end
+
+rand(1..5).times do
+  Experience.create!(
+    user: admin,
+    title: Faker::Job.title,
+    company: Company.order("RANDOM()").first,
+    start_date: Faker::Date.between(from: 5.years.ago, to: 1.year.ago),
+    end_date: [ Faker::Date.between(from: 1.year.ago, to: Date.today), nil ].sample,
+    current: [ true, false ].sample,
+    description: Faker::Lorem.paragraph
+  )
 end
 
 10.times do
