@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :likes, only: [ :create, :destroy ]
   resources :posts
 
-  resources :users, only: [ :show, :edit, :update ]
-  get "profile", to: "users#edit"
+  # resources :users, only: [ :edit, :update ]
+  resources :users, param: :username, only: [ :show ]
 
   namespace :sessions do
     resource :passwordless, only: [ :new, :edit, :create ]
