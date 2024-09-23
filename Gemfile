@@ -66,3 +66,7 @@ gem "authentication-zero", "~> 3.0"
 gem "view_component", "~> 3.14"
 
 gem "slim", "~> 5.2"
+
+gem "dockerfile-rails", ">= 1.6", group: :development
+
+gem "aws-sdk-s3", "~> 1.165", require: false
