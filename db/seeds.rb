@@ -15,17 +15,12 @@ admin = User.create!(
   )
 end
 
-rand(3..8).times do
-  UserSkill.create!(
-    user: admin,
-    skill: Skill.order("RANDOM()").first
-  )
-end
-
-
-
 20.times do
   Skill.create!(name: Faker::Job.key_skill)
+end
+
+rand(3..8).times do
+  admin.skills << Skill.order("RANDOM()").first
 end
 
 5.times do
@@ -116,13 +111,18 @@ end
   end
 
   rand(3..8).times do
-    UserSkill.create!(
-      user: user,
-      skill: Skill.order("RANDOM()").first
-    )
+    user.skills << Skill.order("RANDOM()").first
   end
 end
 
+# Create comments
+100.times do
+  Comment.create!(
+    user: User.order("RANDOM()").first,
+    post: Post.order("RANDOM()").first,
+    body: Faker::Lorem.paragraph
+  )
+end
 
 
 # Create conversations and messages

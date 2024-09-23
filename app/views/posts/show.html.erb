@@ -1,10 +1,9 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @post %>
-
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
+<div class="max-w-lg mx-auto">
   <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  
+  <%= render @post %>
+  
+  <%= render "comments/form", post: @post, comment: Comment.new %>
+  
+  <%= render @post.comments.reverse %>
 </div>
