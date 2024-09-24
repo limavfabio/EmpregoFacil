@@ -5,5 +5,7 @@
   
   <%= render "comments/form", post: @post, comment: Comment.new %>
   
-  <%= render @post.comments.reverse %>
+  <div id="comments">
+    <%= render @post.comments.reverse %>
+  </div>
 </div>

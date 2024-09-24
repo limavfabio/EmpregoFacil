@@ -7,5 +7,8 @@ import { application } from "./application"
 import DrawerController from "./drawer_controller"
 application.register("drawer", DrawerController)
 
+import FormsController from "./forms_controller"
+application.register("forms", FormsController)
+
 import HeaderController from "./header_controller"
 application.register("header", HeaderController)
