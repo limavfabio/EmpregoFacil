@@ -124,6 +124,16 @@ end
   )
 end
 
+# Create likes
+200.times do
+  Like.create!(
+    user: User.order("RANDOM()").first,
+    post: Post.order("RANDOM()").first
+  )
+end
+
+
+
 
 # Create conversations and messages
 20.times do
