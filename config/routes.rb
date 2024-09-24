@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :companies
   resources :job_listings
   resources :likes, only: [ :create, :destroy ]
+  resources :connections, only: [ :create, :update ]
   resources :posts
 
   # resources :users, only: [ :edit, :update ]

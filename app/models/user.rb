@@ -16,8 +16,18 @@ class User < ApplicationRecord
   has_many :likes
   has_many :experiences
   has_many :educations
+
   has_many :user_skills
   has_many :skills, through: :user_skills
+
+  has_many :connections
+  has_many :connected_users, through: :connections
+  has_many :inverse_connections, class_name: "Connection", foreign_key: :connected_user_id
+  has_many :inverse_connected_users, through: :inverse_connections, source: :user
+
+  def all_connected_users
+    connected_users + inverse_connected_users
+  end
 
   has_many :sessions, dependent: :destroy
   has_many :sign_in_tokens, dependent: :destroy
