@@ -9,6 +9,3 @@ application.register("drawer", DrawerController)
 
 import HeaderController from "./header_controller"
 application.register("header", HeaderController)
-
-import LucideIconsController from "./lucide_icons_controller"
-application.register("lucide-icons", LucideIconsController)
