@@ -1,14 +1,29 @@
 <div id="<%= dom_id comment %>" class="my-4 bg-white rounded-lg shadow-md overflow-hidden">
-  <div class="flex items-center p-4">
-      <img class="w-10 h-10 rounded-full" src="https://placehold.co/150" alt="User Profile Picture">
-      <div class="ml-3">
-          <h2 class="font-semibold text-gray-800">
-            <%= comment.user.name %>
-          </h2>
-          <p class="text-gray-600 text-sm">
-            <%= custom_date comment.created_at %>
-          </p>
+  <div class="flex items-center justify-between p-4">
+      <div class="flex items-center">
+        <img class="w-10 h-10 rounded-full" src="https://placehold.co/150" alt="User Profile Picture">
+        <div class="ml-3">
+            <h2 class="font-semibold text-gray-800">
+              <%= comment.user.name %>
+            </h2>
+            <p class="text-gray-600 text-sm">
+              <%= custom_date comment.created_at %>
+            </p>
+        </div>
       </div>
+
+      <sl-dropdown class="-mt-5">
+        <sl-icon-button name="three-dots" slot="trigger" caret></sl-icon-button>
+        <sl-menu class="shadow">
+          
+          <% if comment.user == current_user %>
+            <%= button_to "Delete", comment_path(comment), method: :delete, class: "bg-white flex px-4 w-40 py-2 hover:bg-gray-100" %>
+          <% end %>
+          <div class="bg-white w-40 ps-4 py-2 hover:bg-gray-100">
+            A placeholder
+          </div>
+        </sl-menu>
+      </sl-dropdown>
   </div>
 
     <div class="p-4">
