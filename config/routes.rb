@@ -12,8 +12,7 @@ Rails.application.routes.draw do
   resources :connections, only: [ :create, :update ]
   resources :posts
 
-  # resources :users, only: [ :edit, :update ]
-  resources :users, param: :username, only: [ :show ]
+  resources :users, param: :username, only: [ :show, :edit, :update ]
 
   namespace :sessions do
     resource :passwordless, only: [ :new, :edit, :create ]

@@ -15,6 +15,9 @@
         <sl-drawer label="Drawer" data-drawer-target="drawerMenu">
             <ul class="flex flex-col gap-4">
                 <%= render "layouts/header_link", route: root_path, title: "Home" %>
+                <% if current_user.present? %>
+                    <%= render "layouts/header_link", route: user_path(current_user.username), title: "Profile" %>
+                <% end %>
                 <%= render "layouts/header_link", route: posts_path, title: "Posts" %>
                 <%= render "layouts/header_link", route: job_listings_path, title: "Job listings" %>
             </ul>
