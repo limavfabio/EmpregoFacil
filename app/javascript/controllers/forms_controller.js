@@ -7,4 +7,8 @@ export default class extends Controller {
   resetInput() {
     this.inputTarget.value = ""
   }
+
+  submitForm() {
+    this.element.requestSubmit()
+  }
 }
