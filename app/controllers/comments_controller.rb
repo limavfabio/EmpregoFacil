@@ -54,6 +54,7 @@ class CommentsController < ApplicationController
     @comment.destroy!
 
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@comment) }
       format.html { redirect_back_or_to post_path(@comment.post), notice: "Comment was successfully destroyed." }
       format.json { head :no_content }
     end
