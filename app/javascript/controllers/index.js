@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import DrawerController from "./drawer_controller"
-application.register("drawer", DrawerController)
+import DialogController from "./dialog_controller"
+application.register("dialog", DialogController)
 
 import FormsController from "./forms_controller"
 application.register("forms", FormsController)

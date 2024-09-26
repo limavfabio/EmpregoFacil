@@ -11,8 +11,8 @@
         <%= render "layouts/header_link", route: job_listings_path, title: "Job listings" %>
     </ul>
     
-    <div data-controller="drawer" class="md:hidden">
-        <sl-drawer label="Drawer" data-drawer-target="drawerMenu">
+    <div data-controller="dialog" class="md:hidden">
+        <sl-drawer label="Drawer" data-dialog-target="dialog">
             <ul class="flex flex-col gap-4">
                 <%= render "layouts/header_link", route: root_path, title: "Home" %>
                 <% if current_user.present? %>
@@ -22,6 +22,6 @@
                 <%= render "layouts/header_link", route: job_listings_path, title: "Job listings" %>
             </ul>
         </sl-drawer>
-        <sl-button data-action="click->drawer#show">Open Drawer</sl-button>
+        <sl-button data-action="click->dialog#show">Open Drawer</sl-button>
     </div>
 </header>
