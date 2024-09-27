@@ -1,37 +1,5 @@
-<div id="<%= dom_id experience %>">
-  <p>
-    <strong>User:</strong>
-    <%= experience.user_id %>
-  </p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= experience.title %>
-  </p>
-
-  <p>
-    <strong>Company:</strong>
-    <%= experience.company_id %>
-  </p>
-
-  <p>
-    <strong>Start date:</strong>
-    <%= experience.start_date %>
-  </p>
-
-  <p>
-    <strong>End date:</strong>
-    <%= experience.end_date %>
-  </p>
-
-  <p>
-    <strong>Current:</strong>
-    <%= experience.current %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= experience.description %>
-  </p>
-
+<div id="<%= dom_id experience %>" class="mt-2 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+    <h3 class="font-bold"><%= experience.title %></h3>
+    <p class="text-gray-600"><%= experience.company.name %><span class="text-gray-500"> (<%= experience.start_date %> - <%= experience.end_date %>)</span></p>
+    <p class="text-gray-700"><%= experience.description %></p>
 </div>

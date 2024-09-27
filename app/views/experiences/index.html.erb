@@ -1,12 +1,11 @@
 <div class="flex justify-between items-center">
   <h1 class="text-2xl font-bold">Experiences</h1>
   <div data-controller="dialog">
-    <sl-dialog label="Dialog" class="dialog-overview" data-dialog-target="dialog">
+    <sl-dialog label="Dialog" class="dialog-overview" data-dialog-target="dialog denyClose" >
       <%= render "form", experience: Experience.new %>
-      <sl-button slot="footer" variant="primary">Close</sl-button>
     </sl-dialog>
   
-    <sl-button data-action="click->dialog#show">Open Dialog</sl-button>
+    <sl-button class="self-end" data-action="click->dialog#show">Add Experience</sl-button>
   </div>
 </div>
 <div>

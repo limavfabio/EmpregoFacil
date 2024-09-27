@@ -1,52 +1,48 @@
 <%= form_with(model: experience) do |form| %>
   <% if experience.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(experience.errors.count, "error") %> prohibited this experience from being saved:</h2>
-
+    <div class="bg-red-500 text-white p-4 mb-4 rounded">
+      <h2 class="font-bold"><%= pluralize(experience.errors.count, "error") %> prohibited this experience from being saved:</h2>
       <ul>
-        <% experience.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% experience.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
+  <div class="max-w-lg mx-auto mt-6">
+    <div class="mb-4">
+      <%= form.label :title, class: "block text-gray-700" %>
+      <%= form.text_field :title, class: "mt-1 block w-full border border-gray-300 rounded-md p-2", data: { confirm_discard: true } %>
+    </div>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :company_id, class: "block text-gray-700" %>
+      <%= form.text_field :company_id, class: "mt-1 block w-full border border-gray-300 rounded-md p-2", data: { confirm_discard: true } %>
+    </div>
 
-  <div>
-    <%= form.label :company_id, style: "display: block" %>
-    <%= form.text_field :company_id %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :start_date, class: "block text-gray-700" %>
+      <%= form.date_field :start_date, class: "mt-1 block w-full border border-gray-300 rounded-md p-2", data: { confirm_discard: true } %>
+    </div>
 
-  <div>
-    <%= form.label :start_date, style: "display: block" %>
-    <%= form.date_field :start_date %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :end_date, class: "block text-gray-700" %>
+      <%= form.date_field :end_date, class: "mt-1 block w-full border border-gray-300 rounded-md p-2", data: { confirm_discard: true } %>
+    </div>
 
-  <div>
-    <%= form.label :end_date, style: "display: block" %>
-    <%= form.date_field :end_date %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :current, class: "block text-gray-700" %>
+      <%= form.check_box :current, class: "mt-1" %>
+    </div>
 
-  <div>
-    <%= form.label :current, style: "display: block" %>
-    <%= form.check_box :current %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :description, class: "block text-gray-700" %>
+      <%= form.text_area :description, class: "mt-1 block w-full border border-gray-300 rounded-md p-2", data: { confirm_discard: true } %>
+    </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <div class="flex items-center justify-between">
+      <%= form.submit "Save Experience", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" %>
+    </div>
   </div>
 <% end %>
