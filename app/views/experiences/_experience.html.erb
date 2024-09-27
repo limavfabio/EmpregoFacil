@@ -1,5 +1,19 @@
 <div id="<%= dom_id experience %>" class="mt-2 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-    <h3 class="font-bold"><%= experience.title %></h3>
+    <div class="flex justify-between items-center">
+        <h3 class="font-bold"><%= experience.title %></h3>
+        <div class="flex items-center gap-2">
+            <div data-controller="dialog">
+                <sl-dialog label="Dialog" class="dialog-overview" data-dialog-target="dialog" >
+                    <%= render "form", experience: experience %>
+                </sl-dialog>
+                <sl-tooltip content="Edit">
+                    <sl-icon-button name="pencil-square" class="ml-auto text-gray-500 text-xl hover:bg-gray-100 transition rounded-full" data-action="click->dialog#show"></sl-icon-button>
+                </sl-tooltip>
+            </div>
+
+            <%= render DeleteResourceIconButtonComponent.new(resource: experience) %>
+        </div>
+    </div>
     <p class="text-gray-600"><%= experience.company.name %><span class="text-gray-500"> (<%= experience.start_date %> - <%= experience.end_date %>)</span></p>
     <p class="text-gray-700"><%= experience.description %></p>
 </div>

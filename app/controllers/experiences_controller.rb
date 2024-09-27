@@ -3,7 +3,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences or /experiences.json
   def index
-    @experiences = Experience.all
+    @experiences = current_user.experiences
   end
 
   # GET /experiences/1 or /experiences/1.json
@@ -22,10 +22,11 @@ class ExperiencesController < ApplicationController
   # POST /experiences or /experiences.json
   def create
     @experience = Experience.new(experience_params)
+    @experience.user = current_user
 
     respond_to do |format|
       if @experience.save
-        format.html { redirect_to experience_url(@experience), notice: "Experience was successfully created." }
+        format.html { redirect_to experiences_url, notice: "Experience was successfully created." }
         format.json { render :show, status: :created, location: @experience }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class ExperiencesController < ApplicationController
   def update
     respond_to do |format|
       if @experience.update(experience_params)
-        format.html { redirect_to experience_url(@experience), notice: "Experience was successfully updated." }
+        format.html { redirect_to experiences_url, notice: "Experience was successfully updated." }
         format.json { render :show, status: :ok, location: @experience }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +66,6 @@ class ExperiencesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def experience_params
-      params.require(:experience).permit(:user_id, :title, :company_id, :start_date, :end_date, :current, :description)
+      params.require(:experience).permit(:title, :company_id, :start_date, :end_date, :current, :description)
     end
 end
