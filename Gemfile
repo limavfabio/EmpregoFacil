@@ -64,7 +64,7 @@ end
 
 gem "authentication-zero", "~> 3.0"
 
-gem "view_component", "~> 3.14"
+gem "view_component", "~> 3.18"
 
 gem "slim", "~> 5.2"
 
