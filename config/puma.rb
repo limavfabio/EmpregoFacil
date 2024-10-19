@@ -24,7 +24,7 @@ threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-port ENV.fetch("PORT", 3000)
+port ENV.fetch("PORT", 3001)
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
@@ -32,3 +32,17 @@ plugin :tmp_restart
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+# Configure SSL for HTTPS in development
+if Rails.env.development?
+
+  # If you didn't place the cert and key under `local-certs` you should change this
+  localhost_key = "#{File.join('config', 'ssl', 'server.key')}"
+  localhost_crt = "#{File.join('config', 'ssl', 'server.crt')}"
+
+  ssl_bind "0.0.0.0", 3000, {
+    key: localhost_key,
+    cert: localhost_crt,
+    verify_mode: "none"
+  }
+end

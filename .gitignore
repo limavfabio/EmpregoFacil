@@ -38,3 +38,7 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# Ignore SSL certificates
+/config/ssl/server.key
+/config/ssl/server.crt
