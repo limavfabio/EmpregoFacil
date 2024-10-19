@@ -62,7 +62,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "authentication-zero", "~> 3.0"
+gem "authentication-zero", "~> 4.0"
 
 gem "view_component", "~> 3.14"
 
