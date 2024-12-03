@@ -70,4 +70,4 @@ gem "slim", "~> 5.2"
 
 gem "dockerfile-rails", ">= 1.6", group: :development
 
-gem "aws-sdk-s3", "~> 1.166", require: false
+gem "aws-sdk-s3", "~> 1.175", require: false
